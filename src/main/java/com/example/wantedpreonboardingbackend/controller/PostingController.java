@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,4 +50,10 @@ public class PostingController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @GetMapping("/posting/{postingId}")
+    public ResponseEntity<ResponseDto> viewList(@PathVariable int postingId) {
+        ResponseDto responseDto = postingService.viewOne(postingId);
+
+        return ResponseEntity.ok(responseDto);
+    }
 }

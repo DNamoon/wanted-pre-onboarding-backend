@@ -13,4 +13,6 @@ public interface PostingService {
     ResponseDto delete(ModifyDto deleteRequest);
 
     ResponseDto view(Pageable pageable);
+
+    ResponseDto viewOne(int postingId);
 }

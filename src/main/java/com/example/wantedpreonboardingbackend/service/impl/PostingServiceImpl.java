@@ -132,5 +132,26 @@ public class PostingServiceImpl implements PostingService {
             .build();
     }
 
+    @Override
+    public ResponseDto viewOne(int postingId) {
+        Posting posting = postingRepository.findById(postingId)
+            .orElseThrow(NotExistSuitableDataException::new);
+
+        return ResponseDto.builder()
+            .statusCode(HttpStatus.OK.value())
+            .body(new PostViewDto(
+                posting.getPostingId(),
+                posting.getCompany().getName(),
+                posting.getTitle(),
+                posting.getPosition(),
+                posting.getReward(),
+                posting.getSkill(),
+                posting.getDetail(),
+                posting.getNation(),
+                posting.getRegion()
+            ))
+            .build();
+    }
+
 
 }
