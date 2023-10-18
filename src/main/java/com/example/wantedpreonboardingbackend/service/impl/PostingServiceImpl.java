@@ -10,7 +10,12 @@ import com.example.wantedpreonboardingbackend.repository.CompanyRepository;
 import com.example.wantedpreonboardingbackend.repository.PostingRepository;
 import com.example.wantedpreonboardingbackend.service.PostingService;
 import com.example.wantedpreonboardingbackend.service.dto.PostCreateDto;
+import com.example.wantedpreonboardingbackend.service.dto.PostViewDto;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,6 +101,34 @@ public class PostingServiceImpl implements PostingService {
         return ResponseDto.builder()
             .statusCode(HttpStatus.OK.value())
             .body(new PostCreateDto(deleteTitle))
+            .build();
+    }
+
+    @Override
+    public ResponseDto view(Pageable pageable) {
+        List<PostViewDto> dtoList = new ArrayList<>();
+
+        Page<Posting> list = postingRepository.findAll(pageable);
+
+        for (Posting savedPosting : list) {
+            PostViewDto dto = new PostViewDto(
+                savedPosting.getPostingId(),
+                savedPosting.getCompany().getName(),
+                savedPosting.getTitle(),
+                savedPosting.getPosition(),
+                savedPosting.getReward(),
+                savedPosting.getSkill(),
+                savedPosting.getDetail(),
+                savedPosting.getNation(),
+                savedPosting.getRegion()
+                );
+
+            dtoList.add(dto);
+        }
+
+        return ResponseDto.builder()
+            .statusCode(HttpStatus.OK.value())
+            .body(dtoList)
             .build();
     }
 
