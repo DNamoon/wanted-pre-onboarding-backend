@@ -35,4 +35,32 @@ public class Posting {
     private String skill;
     private String nation;
     private String region;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setReward(Long reward) {
+        this.reward = reward;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 }
