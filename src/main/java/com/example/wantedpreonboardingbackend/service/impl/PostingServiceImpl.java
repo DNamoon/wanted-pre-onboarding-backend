@@ -84,5 +84,20 @@ public class PostingServiceImpl implements PostingService {
             .build();
     }
 
+    @Transactional
+    @Override
+    public ResponseDto delete(ModifyDto deleteRequest) {
+        Posting posting = postingRepository.findById(deleteRequest.getPostingId())
+            .orElseThrow(NotExistSuitableDataException::new);
+
+        String deleteTitle = posting.getTitle();
+        postingRepository.delete(posting);
+
+        return ResponseDto.builder()
+            .statusCode(HttpStatus.OK.value())
+            .body(new PostCreateDto(deleteTitle))
+            .build();
+    }
+
 
 }

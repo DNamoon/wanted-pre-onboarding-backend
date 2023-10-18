@@ -8,4 +8,6 @@ public interface PostingService {
     ResponseDto create(PostingRequestDto request);
 
     ResponseDto modify(ModifyDto request);
+
+    ResponseDto delete(ModifyDto deleteRequest);
 }
